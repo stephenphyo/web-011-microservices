@@ -3,10 +3,10 @@ name: WEB-011 - MICROSERVICES - Platform
 on:
   push:
     branches:
-      - 'PlatformService'
+      - "PlatformService"
   pull_request:
     branches:
-      - 'PlatformService'
+      - "PlatformService"
 
 jobs:
   build:
@@ -58,6 +58,6 @@ jobs:
           script: |
             docker stop web-011-microservices-platform || true
             docker rm web-011-microservices-platform || true
-            docker rmi docker.io/web-011-microservices:platform-latest || true
+            docker rmi docker.io/stephenphyo/web-011-microservices:platform-latest || true
             docker image pull --platform linux/x86_64 docker.io/stephenphyo/web-011-microservices:platform-latest || true
-            docker run -d --name web-011-microservices --restart unless-stopped -p 5011:5011 -p 7011:7011 --platform linux/arm64 docker.io/stephenphyo/web-011-microservices:platform-latest
+            docker run -d --name web-011-microservices-platform --restart unless-stopped -p 5011:80 -p 7011:443 --platform linux/arm64 docker.io/stephenphyo/web-011-microservices:platform-latest
