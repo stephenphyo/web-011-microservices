@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using PlatformService.Data;
 using PlatformService.DTOs;
 using PlatformService.Models;
+using PlatformService.SyncDataServices.Http;
 
 namespace PlatformService.Controllers
 {
@@ -10,15 +11,20 @@ namespace PlatformService.Controllers
     [ApiController]
     public class PlatformController : Controller
     {
-
+        /* Properties */
         private readonly IPlatformRepo _repo;
         private readonly IMapper _mapper;
-        public PlatformController(IPlatformRepo repo, IMapper mapper)
+        private readonly ICommandDataClient _commandDataClient;
+
+        /* Constructor */
+        public PlatformController(IPlatformRepo repo, IMapper mapper, ICommandDataClient commandDataClient)
         {
             _repo = repo;
             _mapper = mapper;
+            _commandDataClient = commandDataClient;
         }
 
+        /* Methods */
         [HttpGet]
         public ActionResult<IEnumerable<PlatformReadDTO>> GetAllPlatforms()
         {
@@ -38,13 +44,22 @@ namespace PlatformService.Controllers
         }
 
         [HttpPost(Name = "CreateNewPlatform")]
-        public ActionResult<PlatformReadDTO> CreateNewPlatform(PlatformCreateDTO platformCreateDTO)
+        public async Task<ActionResult<PlatformReadDTO>> CreateNewPlatform(PlatformCreateDTO platformCreateDTO)
         {
             var platformModel = _mapper.Map<Platform>(platformCreateDTO);
             _repo.Create(platformModel);
             _repo.SaveChanges();
 
             var platformReadDTO = _mapper.Map<PlatformReadDTO>(platformModel);
+
+            try
+            {
+                await _commandDataClient.SendPlatformToCommand(platformReadDTO);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
 
             return CreatedAtRoute(nameof(GetPlatformById), new { Id = platformReadDTO.Id }, platformReadDTO);
         }
