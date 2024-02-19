@@ -40,6 +40,7 @@ namespace PlatformService.Controllers
             {
                 return NotFound();
             }
+            Console.WriteLine(Environment.GetEnvironmentVariable("hello"));
             return Ok(_mapper.Map<PlatformReadDTO>(platformItem));
         }
 

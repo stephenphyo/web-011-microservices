@@ -26,7 +26,8 @@ namespace PlatformService.SyncDataServices.Http
                 "application/json"
             );
 
-            var response = await _httpClient.PostAsync($"{_config["CommandServiceAPI"]}/api/Platform", httpContent);
+            var apiCommandService = Environment.GetEnvironmentVariable("CommandServiceAPI");
+            var response = await _httpClient.PostAsync($"{apiCommandService}/api/c/Platform", httpContent);
 
             if (response.IsSuccessStatusCode)
             {

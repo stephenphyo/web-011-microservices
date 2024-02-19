@@ -1,7 +1,7 @@
 # Build
 FROM  --platform=$BUILDPLATFORM mcr.microsoft.com/dotnet/sdk:8.0 AS build
-ARG TARGETARCH
 WORKDIR /app
+ARG TARGETARCH
 
 # Copy csproj and Restore as Distinct Layers
 COPY *.csproj .
@@ -15,5 +15,8 @@ RUN dotnet publish -c Release -o build
 FROM --platform=arm64 mcr.microsoft.com/dotnet/aspnet:8.0
 WORKDIR /app
 COPY --from=build /app/build .
+
+# ENV
 ENV ASPNETCORE_URLS=http://*:80
+
 ENTRYPOINT ["dotnet", "PlatformService.dll"]

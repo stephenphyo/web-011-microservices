@@ -1,4 +1,3 @@
-D:\WEB PROJECTS\WEB-011 - MICROSERVICES\PlatformService\bin\Debug\net8.0\appsettings.Development.json
 D:\WEB PROJECTS\WEB-011 - MICROSERVICES\PlatformService\bin\Debug\net8.0\appsettings.json
 D:\WEB PROJECTS\WEB-011 - MICROSERVICES\PlatformService\bin\Debug\net8.0\PlatformService.exe
 D:\WEB PROJECTS\WEB-011 - MICROSERVICES\PlatformService\bin\Debug\net8.0\PlatformService.deps.json

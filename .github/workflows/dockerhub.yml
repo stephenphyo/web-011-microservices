@@ -1,4 +1,4 @@
-name: WEB-011 - MICROSERVICES - Platform
+name: WEB-011 - MICROSERVICES - Platform Service
 
 on:
   push:
