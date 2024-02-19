@@ -60,4 +60,4 @@ jobs:
             docker rm web-011-microservices-command || true
             docker rmi docker.io/stephenphyo/web-011-microservices:command-latest || true
             docker image pull --platform linux/x86_64 docker.io/stephenphyo/web-011-microservices:command-latest || true
-            docker run -d --name web-011-microservices-command --restart unless-stopped -p 5011:80 -p 7011:443 --platform linux/arm64 docker.io/stephenphyo/web-011-microservices:command-latest
+            docker run -d --name web-011-microservices-command --restart unless-stopped -p 15011:80 -p 17011:443 --platform linux/arm64 docker.io/stephenphyo/web-011-microservices:command-latest
