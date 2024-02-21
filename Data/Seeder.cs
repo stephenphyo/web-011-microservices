@@ -1,19 +1,33 @@
+using Microsoft.EntityFrameworkCore;
 using PlatformService.Models;
 
 namespace PlatformService.Data
 {
     public static class Seeder
     {
-        public static void Initialize(IApplicationBuilder app)
+        public static void Initialize(IApplicationBuilder app, bool isProduction)
         {
             using (var serviceScope = app.ApplicationServices.CreateScope())
             {
-                SeedData(serviceScope.ServiceProvider.GetService<AppDbContext>());
+                SeedData(serviceScope.ServiceProvider.GetService<AppDbContext>(), isProduction);
             }
         }
 
-        public static void SeedData(AppDbContext ctx)
+        public static void SeedData(AppDbContext ctx, bool isProduction)
         {
+            if (isProduction)
+            {
+                Console.WriteLine("Applying Migrations...");
+                try
+                {
+                    ctx.Database.Migrate();
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                }
+            }
+
             if (!ctx.Platforms.Any())
             {
                 Console.WriteLine("Seeding Data ...");
@@ -29,6 +43,7 @@ namespace PlatformService.Data
             {
                 Console.WriteLine("Data Already Existed");
             }
+
         }
     }
 }
