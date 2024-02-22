@@ -138,3 +138,4 @@ D:\WEB PROJECTS\WEB-011 - MICROSERVICES\PlatformService\obj\Debug\net8.0\Platfor
 D:\WEB PROJECTS\WEB-011 - MICROSERVICES\PlatformService\obj\Debug\net8.0\PlatformService.genruntimeconfig.cache
 D:\WEB PROJECTS\WEB-011 - MICROSERVICES\PlatformService\obj\Debug\net8.0\ref\PlatformService.dll
 D:\WEB PROJECTS\WEB-011 - MICROSERVICES\PlatformService\obj\Debug\net8.0\PlatformService.sourcelink.json
+D:\WEB PROJECTS\WEB-011 - MICROSERVICES\PlatformService\bin\Debug\net8.0\RabbitMQ.Client.dll
