@@ -104,3 +104,4 @@ D:\WEB PROJECTS\WEB-011 - MICROSERVICES\CommandService\obj\Debug\net8.0\refint\C
 D:\WEB PROJECTS\WEB-011 - MICROSERVICES\CommandService\obj\Debug\net8.0\CommandService.pdb
 D:\WEB PROJECTS\WEB-011 - MICROSERVICES\CommandService\obj\Debug\net8.0\CommandService.genruntimeconfig.cache
 D:\WEB PROJECTS\WEB-011 - MICROSERVICES\CommandService\obj\Debug\net8.0\ref\CommandService.dll
+D:\WEB PROJECTS\WEB-011 - MICROSERVICES\CommandService\obj\Debug\net8.0\CommandService.sourcelink.json
