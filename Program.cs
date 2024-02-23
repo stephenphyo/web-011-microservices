@@ -1,6 +1,14 @@
+using CommandService.AsyncDataServices;
 using CommandService.Data;
+using CommandService.EventProcessing;
 using CommandService.Repositories;
 using Microsoft.EntityFrameworkCore;
+using CommandService;
+
+/* .ENV Loading */
+var root = Directory.GetCurrentDirectory();
+var dotenvFile = Path.Combine(root, ".env");
+DotEnv.Load(dotenvFile);
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,6 +19,10 @@ builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 builder.Services.AddScoped<IPlatformRepo, PlatformRepo>();
 builder.Services.AddScoped<ICommandRepo, CommandRepo>();
+
+builder.Services.AddSingleton<IEventProcessor, EventProcessor>();
+
+builder.Services.AddHostedService<MessageBusSubscriber>();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();

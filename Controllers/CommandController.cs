@@ -38,7 +38,7 @@ namespace CommandService.Controllers
 
             var commandItems = _commandRepo.GetAllCommandsForPlatform(platformId);
 
-            return Ok(_mapper.Map<CommandReadDTO>(commandItems));
+            return Ok(_mapper.Map<IEnumerable<CommandReadDTO>>(commandItems));
         }
 
         [HttpGet("{commandId}", Name = "GetCommandById")]
@@ -56,7 +56,7 @@ namespace CommandService.Controllers
         [HttpPost]
         public ActionResult<CommandReadDTO> CreateCommandForPlatform(int platformId, CommandCreateDTO commandCreateDTO)
         {
-            if (_platformRepo.CheckPlatformExists(platformId)) return NotFound();
+            if (!_platformRepo.CheckPlatformExists(platformId)) return NotFound();
 
             var command = _mapper.Map<Command>(commandCreateDTO);
             _commandRepo.Create(platformId, command);

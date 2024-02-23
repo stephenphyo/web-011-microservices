@@ -1,4 +1,4 @@
-namespace PlatformService
+namespace CommandService
 {
     public static class DotEnv
     {
