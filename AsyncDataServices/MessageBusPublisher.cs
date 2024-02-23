@@ -5,14 +5,14 @@ using RabbitMQ.Client;
 
 namespace PlatformService.AsyncDataServices
 {
-    public class MessageBusClient : IMessageBusClient
+    public class MessageBusPublisher : IMessageBusPublisher
     {
         /* Properties */
         private readonly IConnection _connection;
         private readonly IModel _channel;
 
         /* Constructor */
-        public MessageBusClient()
+        public MessageBusPublisher()
         {
             var factory = new ConnectionFactory()
             {
@@ -26,6 +26,7 @@ namespace PlatformService.AsyncDataServices
                 _channel = _connection.CreateModel();
 
                 _channel.ExchangeDeclare(exchange: "trigger", type: ExchangeType.Fanout);
+
                 _connection.ConnectionShutdown += RabbitMQConnectionShutdown;
 
                 Console.WriteLine("---RabbitMQ Message Bus Connection Successful---");
@@ -43,7 +44,7 @@ namespace PlatformService.AsyncDataServices
             if (_connection.IsOpen)
             {
                 Console.WriteLine("---RabbitMQ Connection is Open---");
-                // PublishMessage(message);
+                PublishMessage(message);
             }
             else
             {

@@ -48,7 +48,7 @@ builder.Services.AddHttpClient<ICommandDataClient, HttpCommandDataClient>();
 
 builder.Services.AddScoped<IPlatformRepo, PlatformRepo>();
 
-builder.Services.AddSingleton<IMessageBusClient, MessageBusClient>();
+builder.Services.AddSingleton<IMessageBusPublisher, MessageBusPublisher>();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();

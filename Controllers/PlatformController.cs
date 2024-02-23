@@ -17,19 +17,19 @@ namespace PlatformService.Controllers
         private readonly IPlatformRepo _repo;
         private readonly IMapper _mapper;
         private readonly ICommandDataClient _commandDataClient;
-        private readonly IMessageBusClient _messageBusClient;
+        private readonly IMessageBusPublisher _messageBusPublisher;
 
         /* Constructor */
         public PlatformController(
             IPlatformRepo repo,
             IMapper mapper,
             ICommandDataClient commandDataClient,
-            IMessageBusClient messageBusClient)
+            IMessageBusPublisher messageBusPublisher)
         {
             _repo = repo;
             _mapper = mapper;
             _commandDataClient = commandDataClient;
-            _messageBusClient = messageBusClient;
+            _messageBusPublisher = messageBusPublisher;
         }
 
         /* Methods */
@@ -76,7 +76,7 @@ namespace PlatformService.Controllers
             {
                 var platformPublishedDTO = _mapper.Map<PlatformPublishedDTO>(platformReadDTO);
                 platformPublishedDTO.Event = "Platform_Published";
-                _messageBusClient.PublishNewPlatform(platformPublishedDTO);
+                _messageBusPublisher.PublishNewPlatform(platformPublishedDTO);
             }
             catch (Exception e)
             {
